@@ -18,10 +18,11 @@ class AlignCustom(object):
         pass
     
     def getPos(self, points):
-        if abs(points[0] - points[2]) / abs(points[1] - points[2]) > 2:
-            return "Right";
-        elif abs(points[1] - points[2]) / abs(points[0] - points[2]) > 2:
-            return "Left";
+        if abs(points[0] - points[2]) / (abs(points[1] - points[2])+0.00001) > 2:
+            return "Right"
+
+        elif abs(points[1] - points[2]) / (abs(points[0] - points[2])+0.00001) > 2:
+            return "Left"
         return "Center"
 
     def list2colmatrix(self, pts_list):

@@ -5,13 +5,12 @@ Run the pretrained model to extract 128D face features
 
 import tensorflow as tf
 from architecture import inception_resnet_v1 as resnet
-from tensorflow.python.platform import gfile
+#from tensorflow.python.platform import gfile
 import numpy as np
 import os
 class FaceFeature(object):
     def __init__(self, face_rec_graph, model_path = 'models/20170512-110547.pb'):
         '''
-
         :param face_rec_sess: FaceRecSession object
         :param model_path:
         '''
@@ -44,7 +43,8 @@ class FaceFeature(object):
         model_exp = os.path.expanduser(model)
         if os.path.isfile(model_exp):
             print('Model filename: %s' % model_exp)
-            with gfile.FastGFile(model_exp, 'rb') as file_:
+            
+            with tf.gfile.GFile(model_exp, 'rb') as file_:
                 graph_def = tf.GraphDef()
                 graph_def.ParseFromString(file_.read())
                 tf.import_graph_def(graph_def, name='')
